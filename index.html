@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<!-- Add an element to display the notification -->
+    <div>Turn your internet off and on to see the changes in the notification div at the page bottom</div>
+    <div id="notification"></div>
+
+<script>
+  // Get the notification element
+  const notification = document.getElementById('notification');
+
+  // Set the initial notification message and background color
+  let message = 'You are currently ';
+  if(navigator.onLine){
+    color = '#0f0';
+  } else{
+    color = '#f00';
+  } /*let color = navigator.onLine ? '#0f0' : '#f00';*/
+  notification.textContent = message + ( navigator.onLine ? 'online' + String.fromCodePoint(0x1F600) : 'offline' + String.fromCodePoint(0x1F625)); /*This part*/
+  notification.style.backgroundColor = color;
+
+  // Add an event listener for online/offline events
+  window.addEventListener('online', () => {
+    notification.textContent = 'You are now online' + String.fromCodePoint(0x1F600);
+    notification.style.backgroundColor = '#0f0';
+  });
+  window.addEventListener('offline', () => {
+    notification.textContent = 'You are now offline' + String.fromCodePoint(0x1F625);
+    notification.style.backgroundColor = '#f00';
+  });
+</script>
+
+	</body>
+</html>
